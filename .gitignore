@@ -1,0 +1,17 @@
+.DS_Store
+node_modules
+.tmp
+npm-debug.log
+*.sh
+*.terraform
+*.pem
+*.tfvars
+*.tfplan
+*.tfstate
+*.tfstate.backup
+*.lock.info
+.terraform
+.DS_Store
+*.hcl
+tf_sa_key
+th-ifegcplab-lab-e04779-da857f85c2c4.json
