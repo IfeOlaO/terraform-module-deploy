@@ -1,34 +1,39 @@
 ####VPC
-module "vpc" {
-  source = "terraform-google-modules/network/google"
-  #version = "~> 2.0.0"
+# module "vpc" {
+#   source = "terraform-google-modules/network/google"
+#   #version = "~> 2.0.0"
 
-  project_id   = var.project_id
-  network_name = var.network_name
-
-
+#   project_id   = var.project_id
+#   network_name = var.network_name
 
 
-  ####SUBNET
-
-  subnets = [
-    {
-      subnet_name   = "subnet-01"
-      subnet_ip     = "10.10.10.0/24"
-      subnet_region = var.region
-    },
-    {
-      subnet_name           = "subnet-02"
-      subnet_ip             = "10.20.10.0/24"
-      subnet_region         = var.region
-      subnet_private_access = "true"
-      description           = "This subnet is private"
-    }
 
 
-  ]
+#   ####SUBNET
 
-}
+#   subnets = [
+#     {
+#       subnet_name   = "subnet-01"
+#       subnet_ip     = "10.10.10.0/24"
+#       subnet_region = var.region
+#     },
+#     {
+#       subnet_name           = "subnet-02"
+#       subnet_ip             = "10.20.10.0/24"
+#       subnet_region         = var.region
+#       subnet_private_access = "true"
+#       description           = "This subnet is private"
+#     }
+
+
+#   ]
+
+#  }
+
+
+
+
+
 
 ###FIREWALL
 module "network_firewall-rules" {
@@ -36,7 +41,7 @@ module "network_firewall-rules" {
   #version = "9.0.0"
 
   project_id   = var.project_id
-  network_name = module.vpc.network_name
+  network_name = var.network_name
   rules = [{
     name                    = "allow-ssh-ingress"
     description             = null

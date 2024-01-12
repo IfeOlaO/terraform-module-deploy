@@ -1,3 +1,15 @@
+####ENV_SUBNET
+module "env_subnet" {
+  source = "./modules/env_subnet"
+  #subnet_name= "subnet-${each.key}"
+  project_id       = var.project_id
+  region           = var.region
+  network_name     = var.network_name
+  network          = module.env_subnet.subnets_self_links
+  environment_list = var.environment_list
+}
+
+
 # ###COMPUTE
 
 ####CREATE COMPUTE INSTANCE - PUBLIC
@@ -17,7 +29,7 @@ resource "google_compute_instance" "public-vm" {
   }
 
   network_interface {
-    subnetwork = module.vpc.subnets_self_links[0]
+    subnetwork = module.env_subnet.subnets_self_links[0]
     access_config {
       // Ephemeral IP
     }
@@ -42,7 +54,7 @@ resource "google_compute_instance" "env-vm" {
   }
 
   network_interface {
-    subnetwork = module.vpc.subnets_self_links[1]
+    subnetwork = module.env_subnet.subnets_self_links[0]
     access_config {
       // Ephemeral IP
     }
@@ -60,7 +72,7 @@ module "webservers" {
   region          = var.region
   zone            = var.zone
   network_interface = {
-    network    = module.vpc.network_self_link,
-    subnetwork = module.vpc.subnets_self_links[0]
+    network    = module.env_subnet.network_self_link,
+    subnetwork = module.env_subnet.subnets_self_links[0]
   }
 }

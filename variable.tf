@@ -4,7 +4,7 @@ variable "project_id" {
 }
 
 variable "project_name" {
-  type = string
+  type    = string
   default = "th-ifegcplab"
 }
 
@@ -61,12 +61,6 @@ variable "environment_instance_settings" {
       machine_type = "f1-micro"
       labels = {
         environment = "dev"
-      }
-    },
-    "QA" = {
-      machine_type = "e2-micro"
-      labels = {
-        environment = "qa"
       }
     },
     "STAGE" = {
